@@ -1,6 +1,6 @@
 # Math Boggle
 
-## Installation/Running
+## Install & Run
 
 ```
 npm install
