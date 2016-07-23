@@ -32,9 +32,11 @@ class MathBoggle extends React.Component {
   render(){
     return (
       <div>
-        <TimeTracker totalTime={59} onCountdownComplete={this.onCountdownComplete} />
-        <ScoreTracker score={this.state.score} />
-        <GameBoard />
+        <div className="math-boggle">
+          <TimeTracker totalTime={59} onCountdownComplete={this.onCountdownComplete} />
+          <ScoreTracker score={this.state.score} />
+          <GameBoard />
+        </div>
       </div>
     )
   }
