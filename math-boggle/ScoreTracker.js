@@ -4,12 +4,14 @@ class ScoreTracker extends React.Component {
   constructor(props){
     super()
     this.state = {
-      score: 0
+      score: props.scoreIncrease
     }
+    this.updateScore = updateScore.bind(this)
   }
   updateScore(){
+    console.log("asdf")
     this.setState({
-      score: this.state.score + this.props.scoreIncrease
+      score: this.state.score + 1
     })
   }
   resetScore(){
@@ -21,6 +23,8 @@ class ScoreTracker extends React.Component {
     return (
       <div>
         Score: {this.state.score}
+        <button onClick={this.updateScore}></button>
+        <button onClick={this.resetScore}></button>
       </div>
     )
   }
