@@ -1,10 +1,10 @@
 import React from 'react'
 
 class TimeTracker extends React.Component {
-  constructor(){
+  constructor(props){
     super()
     this.state = {
-      timeRemaining: 59,
+      timeRemaining: props.totalTime,
       timeLeft: true
     }
     this.countdown = this.countdown.bind(this)
@@ -22,6 +22,7 @@ class TimeTracker extends React.Component {
     if(newTimeRemaining <= 0){
       clearInterval(this.state.intervalID)
       this.setState({ timeLeft: false })
+      this.props.onCountdownComplete()
     }
     this.setState({ timeRemaining: newTimeRemaining })
   }
