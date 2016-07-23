@@ -1,0 +1,67 @@
+body {
+  background-color: #272822;
+  color: white;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
+}
+
+.button {
+  width: 60px;
+  height: 60px;
+  text-decoration: none;
+  border: 1px solid black;
+  font-size: 18px;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
+}
+
+.button:focus {
+  outline: 0;
+}
+
+
+
+
+.operands .button {
+  background-color: #e0e0e0;
+  color: black;
+}
+
+.operands .button:hover {
+  background-color: #ccc;
+}
+
+.operands .button:focus {
+  outline: 0;
+}
+
+.operands .button:disabled {
+  background-color: #ccc;
+}
+
+
+
+
+
+.operators .button {
+  background-color: #f5923e;
+  color: white;
+  font-size: 24px;
+}
+
+.operators .button:hover {
+  background-color: #c2732f;
+}
+
+
+
+
+
+.equals {
+  color: white;
+  background-color: #7b9a38;
+  width: 300px;
+  font-size: 32px;
+}
+
+.equals:hover {
+  background-color: #688035;
+}
