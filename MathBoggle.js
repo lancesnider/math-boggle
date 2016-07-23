@@ -1,14 +1,9 @@
 import React from 'react'
+import ScoreTracker from './math-boggle/ScoreTracker'
 
 class TimeTracker extends React.Component {
   render(){
     return <div>Countdown Timer Goes Here</div>
-  }
-}
-
-class ScoreTracker extends React.Component {
-  render(){
-    return <div>Current Score Goes Here</div>
   }
 }
 
