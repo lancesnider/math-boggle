@@ -4,6 +4,12 @@ body {
   font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
 }
 
+.math-boggle {
+  width: 300px;
+  padding-top: 20px;
+  margin: auto;
+}
+
 .button {
   width: 60px;
   height: 60px;
