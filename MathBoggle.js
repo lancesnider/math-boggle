@@ -15,11 +15,31 @@ class Operators extends React.Component {
 }
 
 class MathBoggle extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      score: 0
+    }
+    this.addToScore = this.addToScore.bind(this)
+    this.onCountdownComplete = this.onCountdownComplete.bind(this)
+  }
+
+  onCountdownComplete(){
+    console.log("Countdown complete")
+  }
+
+  addToScore(scoreToAdd){
+    this.setState({
+      score: this.state.score + scoreToAdd
+    })
+  }
+
   render(){
     return (
       <div>
-        <TimeTracker />
-        <ScoreTracker />
+        <TimeTracker totalTime={59} onCountdownComplete={this.onCountdownComplete} />
+        <ScoreTracker score={this.state.score} />
+        <button onClick={() => this.addToScore(3)} />
         <NumbersBoard />
         <Operators />
       </div>
