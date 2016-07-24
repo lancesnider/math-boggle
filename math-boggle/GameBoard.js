@@ -3,7 +3,7 @@ import Operands from './Operands'
 import Operators from './Operators'
 
 class GameBoard extends React.Component {
-  constructor(){
+  constructor(props){
     super()
     this.receiveClick = this.receiveClick.bind(this)
   }
@@ -13,7 +13,7 @@ class GameBoard extends React.Component {
   render(){
     return (
       <div>
-        <Operands receiveClick={this.receiveClick} />
+        <Operands isPlaying={this.props.isPlaying} receiveClick={this.receiveClick} />
         <Operators receiveClick={this.receiveClick} />
       </div>
     )

@@ -10,6 +10,12 @@ class Operands extends React.Component {
     this.arrayOfRandomNumbers(5, 5)
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.isPlaying){
+      this.arrayOfRandomNumbers(5, 5)
+    }
+  }
+
   arrayOfRandomNumbers(rows, columns){
     var numbersArray = []
     for (var i = 0; i < rows; i++) {
