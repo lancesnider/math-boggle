@@ -10,6 +10,12 @@ class Operands extends React.Component {
     this.arrayOfRandomNumbers(5, 5)
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.isPlaying){
+      this.arrayOfRandomNumbers(5, 5)
+    }
+  }
+
   arrayOfRandomNumbers(rows, columns){
     var numbersArray = []
     for (var i = 0; i < rows; i++) {
@@ -43,15 +49,22 @@ class Operands extends React.Component {
 }
 
 class OperandsRow extends React.Component {
+  constructor(){
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick(number){
+    this.props.receiveClick(number)
+  }
   render(){
-    var operands = this.props.rowNumbers.map(function(operand, key){
+    var operandsButtons = this.props.rowNumbers.map(function(operand, key){
       return (
-        <button key={key} className="button" onClick={this.props.receiveClick.bind(this, operand)} >{operand}</button>
+        <button key={key} className="button" onClick={this.handleClick.bind(this, operand)} >{operand}</button>
       )
     }, this)
     return (
       <div>
-        {operands}
+        {operandsButtons}
       </div>
     )
   }

@@ -13,14 +13,16 @@ class MathBoggle extends React.Component {
   constructor(){
     super()
     this.state = {
-      score: 0
+      score: 0,
+      playing: false
     }
     this.addToScore = this.addToScore.bind(this)
     this.onCountdownComplete = this.onCountdownComplete.bind(this)
+    this.playMathBoggle = this.playMathBoggle.bind(this)
   }
 
   onCountdownComplete(){
-    console.log("Countdown complete")
+    this.playMathBoggle(false)
   }
 
   addToScore(scoreToAdd){
@@ -29,13 +31,28 @@ class MathBoggle extends React.Component {
     })
   }
 
+  playMathBoggle(isPlaying){
+    this.setState({playing: isPlaying})
+    if(isPlaying){
+      this.setState({score: 0})
+    }
+  }
+
   render(){
     return (
       <div>
         <div className="math-boggle">
-          <TimeTracker totalTime={59} onCountdownComplete={this.onCountdownComplete} />
-          <ScoreTracker score={this.state.score} />
-          <GameBoard />
+          <TimeTracker
+            isPlaying={this.state.playing}
+            totalTime={5}
+            onCountdownComplete={this.onCountdownComplete}/>
+          <ScoreTracker
+            score={this.state.score} />
+          <button
+            disabled={this.state.playing}
+            onClick={this.playMathBoggle.bind(this, true)} >Play</button>
+          <GameBoard
+            isPlaying={this.state.playing} />
         </div>
       </div>
     )
