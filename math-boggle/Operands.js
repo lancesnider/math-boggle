@@ -11,7 +11,7 @@ class Operands extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.isPlaying){
+    if(!this.props.isPlaying && nextProps.isPlaying){
       this.arrayOfRandomNumbers(5, 5)
     }
   }

@@ -3,12 +3,6 @@ import ScoreTracker from './math-boggle/ScoreTracker'
 import TimeTracker from './math-boggle/TimeTracker'
 import GameBoard from './math-boggle/GameBoard'
 
-class Operators extends React.Component {
-  render(){
-    return <div>Operators go here</div>
-  }
-}
-
 class MathBoggle extends React.Component {
   constructor(){
     super()
@@ -44,7 +38,7 @@ class MathBoggle extends React.Component {
         <div className="math-boggle">
           <TimeTracker
             isPlaying={this.state.playing}
-            totalTime={5}
+            totalTime={59}
             onCountdownComplete={this.onCountdownComplete}/>
           <ScoreTracker
             score={this.state.score} />
@@ -52,6 +46,7 @@ class MathBoggle extends React.Component {
             disabled={this.state.playing}
             onClick={this.playMathBoggle.bind(this, true)} >Play</button>
           <GameBoard
+            addToScore={this.addToScore}
             isPlaying={this.state.playing} />
         </div>
       </div>
