@@ -30,7 +30,7 @@ class TimeTracker extends React.Component {
     clearInterval(this.state.intervalID)
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.isPlaying){
+    if(nextProps.isPlaying && !this.props.isPlaying){
       this.setState({timeRemaining: this.props.totalTime})
       this.startCountdown()
     }
