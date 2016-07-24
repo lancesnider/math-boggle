@@ -26,11 +26,14 @@ class TimeTracker extends React.Component {
     }
     this.setState({ timeRemaining: newTimeRemaining })
   }
-  componentDidMount(){
-    this.startCountdown()
-  }
   componentWillUnmount(){
     clearInterval(this.state.intervalID)
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.isPlaying){
+      this.setState({timeRemaining: this.props.totalTime})
+      this.startCountdown()
+    }
   }
   render(){
     return (
