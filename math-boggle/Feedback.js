@@ -23,7 +23,6 @@ class Feedback extends React.Component {
   }
 
   hideInterval(){
-    console.log("asdf")
     this.setState({
       hidden: "hidden"
     })
@@ -33,7 +32,6 @@ class Feedback extends React.Component {
     this.hideInterval()
   }
   render(){
-    console.log(this.props.score)
     return (
       <div className="feedback">
         <div className={this.state.hidden} >+{this.state.points}</div>

@@ -77,13 +77,11 @@ class GameBoard extends React.Component {
     })
   }
   componentWillReceiveProps(nextProps){
-    if(!this.props.isPlaying){
+    if(!nextProps.isPlaying){
       this.resetOperation()
     }
   }
   render(){
-    console.log("Operation array: " + this.state.operationArray)
-    console.log("Correct array: " + this.state.correctAnswerArray)
     return (
       <div>
         <Feedback
