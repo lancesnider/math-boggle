@@ -1,6 +1,7 @@
 import React from 'react'
 import Operands from './Operands'
 import Operators from './Operators'
+import Feedback from './Feedback'
 
 class GameBoard extends React.Component {
   constructor(props){
@@ -38,7 +39,8 @@ class GameBoard extends React.Component {
       newCorrectAnswerArray.shift()
       if(newCorrectAnswerArray.length == 0){
         console.log("Correct answer!!!")
-        this.props.addToScore(1)
+        var points = 1
+        this.props.addToScore(points)
         this.resetOperation()
       }else{
         this.setState({
@@ -84,6 +86,8 @@ class GameBoard extends React.Component {
     console.log("Correct array: " + this.state.correctAnswerArray)
     return (
       <div>
+        <Feedback
+          score={this.props.score} />
         <Operands
           isPlaying={this.props.isPlaying}
           receiveClick={this.receiveClick}

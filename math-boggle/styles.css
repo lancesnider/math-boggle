@@ -40,11 +40,26 @@ body {
 }
 
 .operands .button:disabled {
-  background-color: #ccc;
+  background-color: #999;
 }
 
 
+.feedback {
+  position: absolute;
+  font-size: 54px;
+  font-weight: bold;
+  color: green;
+  width: 300px;
+  height: 300px;
+  line-height: 300px;
+  vertical-align: center;
+  text-align: center;
+  pointer-events:none;
+}
 
+.hidden {
+  display: none;
+}
 
 
 .operators .button {
