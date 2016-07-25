@@ -36,7 +36,7 @@ class Operands extends React.Component {
     var rows = this.state.randomNumbers.map(function(number, key){
       return (
         <div key={key} >
-          <OperandsRow rowNumbers={number} receiveClick={this.props.receiveClick} />
+          <OperandsRow row={key} rowNumbers={number} receiveClick={this.props.receiveClick} />
         </div>
       )
     }, this)
@@ -53,13 +53,14 @@ class OperandsRow extends React.Component {
     super()
     this.handleClick = this.handleClick.bind(this)
   }
-  handleClick(number){
+  handleClick(number, column){
+    console.log(this.props.row, column)
     this.props.receiveClick(number)
   }
   render(){
     var operandsButtons = this.props.rowNumbers.map(function(operand, key){
       return (
-        <button key={key} className="button" onClick={this.handleClick.bind(this, operand)} >{operand}</button>
+        <button key={key} className="button" onClick={this.handleClick.bind(this, operand, key)} >{operand}</button>
       )
     }, this)
     return (
