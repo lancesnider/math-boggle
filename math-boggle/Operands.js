@@ -5,21 +5,31 @@ class Operands extends React.Component {
   constructor(props){
     super()
 
+    this.state = {
+      disabledButtons: []
+    }
+
     this.arrayOfRandomNumbers = this.arrayOfRandomNumbers.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.resetOperands = this.resetOperands.bind(this)
     this.checkIfAdjacent = this.checkIfAdjacent.bind(this)
+    this.resetDisabledButtons = this.resetDisabledButtons.bind(this)
+    this.updateDisabledButtons = this.updateDisabledButtons.bind(this)
 
     this.previousBtnRowColumn = []
   }
 
   componentWillMount(){
+    this.resetDisabledButtons(true)
     this.arrayOfRandomNumbers(5, 5)
   }
 
   componentWillReceiveProps(nextProps){
     if(!this.props.isPlaying && nextProps.isPlaying){
+      this.resetDisabledButtons(false)
       this.arrayOfRandomNumbers(5, 5)
+    }else if(this.props.isPlaying && !nextProps.isPlaying){
+      this.resetDisabledButtons(true)
     }
 
     if(nextProps.operationArray.length == 0){
@@ -28,7 +38,26 @@ class Operands extends React.Component {
   }
 
   resetOperands(){
+    this.resetDisabledButtons(false)
     this.previousBtnRowColumn = []
+  }
+
+  resetDisabledButtons(isEnabled){
+    var disabledButtons = []
+    for (var i = 0; i < 5; i++) {
+      disabledButtons[i] = [isEnabled, isEnabled, isEnabled, isEnabled, isEnabled]
+    }
+    this.setState({
+      disabledButtons: disabledButtons
+    })
+  }
+
+  updateDisabledButtons(row, column){
+    var disabledButtons = this.state.disabledButtons
+    disabledButtons[row][column] = true
+    this.setState({
+      disabledButtons: disabledButtons
+    })
   }
 
   arrayOfRandomNumbers(rows, columns){
@@ -48,6 +77,7 @@ class Operands extends React.Component {
 
   handleClick(number, row, column){
     if(this.checkIfAdjacent(row, column)){
+      this.updateDisabledButtons(row, column)
       this.props.receiveClick(number)
     }else{
       this.props.receiveClick("wrong")
@@ -66,9 +96,10 @@ class Operands extends React.Component {
 
   render(){
     var rows = this.state.randomNumbers.map(function(number, key){
+      var disabledButtonsRow = this.state.disabledButtons[key]
       return (
         <div key={key} >
-          <OperandsRow row={key} rowNumbers={number} receiveClick={this.handleClick} />
+          <OperandsRow disabledButtons={this.state.disabledButtons[key]} row={key} rowNumbers={number} receiveClick={this.handleClick} />
         </div>
       )
     }, this)

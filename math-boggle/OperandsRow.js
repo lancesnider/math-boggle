@@ -1,21 +1,27 @@
 import React from 'react'
 class OperandsRow extends React.Component {
-  constructor(){
+  constructor(props){
     super()
     this.handleClick = this.handleClick.bind(this)
+    this.operandsButtons = []
   }
   handleClick(number, column){
     this.props.receiveClick(number, this.props.row, column)
   }
   render(){
-    var operandsButtons = this.props.rowNumbers.map(function(operand, key){
+    this.operandsButtons = this.props.rowNumbers.map(function(operand, key){
       return (
-        <button key={key} className="button" onClick={this.handleClick.bind(this, operand, key)} >{operand}</button>
+        <button
+          key={key}
+          className="button"
+          onClick={this.handleClick.bind(this, operand, key)}
+          disabled={this.props.disabledButtons[key]}
+        >{operand}</button>
       )
     }, this)
     return (
       <div>
-        {operandsButtons}
+        {this.operandsButtons}
       </div>
     )
   }
