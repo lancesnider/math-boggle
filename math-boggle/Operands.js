@@ -30,6 +30,8 @@ class Operands extends React.Component {
       this.arrayOfRandomNumbers(5, 5)
     }else if(this.props.isPlaying && !nextProps.isPlaying){
       this.resetDisabledButtons(true)
+    }else if(nextProps.operationArray.length == 0 && nextProps.isPlaying){
+      this.resetOperands()
     }
   }
 
@@ -39,7 +41,6 @@ class Operands extends React.Component {
   }
 
   resetDisabledButtons(isEnabled){
-    console.log(isEnabled)
     var disabledButtons = []
     for (var i = 0; i < 5; i++) {
       disabledButtons[i] = [isEnabled, isEnabled, isEnabled, isEnabled, isEnabled]
