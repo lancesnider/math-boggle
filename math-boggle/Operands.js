@@ -30,9 +30,7 @@ class Operands extends React.Component {
       this.arrayOfRandomNumbers(5, 5)
     }else if(this.props.isPlaying && !nextProps.isPlaying){
       this.resetDisabledButtons(true)
-    }
-
-    if(nextProps.operationArray.length == 0){
+    }else if(nextProps.operationArray.length == 0 && nextProps.isPlaying){
       this.resetOperands()
     }
   }

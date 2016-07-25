@@ -46,6 +46,7 @@ class MathBoggle extends React.Component {
             disabled={this.state.playing}
             onClick={this.playMathBoggle.bind(this, true)} >Play</button>
           <GameBoard
+            score={this.state.score}
             addToScore={this.addToScore}
             isPlaying={this.state.playing} />
         </div>
