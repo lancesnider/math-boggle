@@ -17,8 +17,14 @@ class GameBoard extends React.Component {
   }
   receiveClick(buttonClicked){
 
-    if(!this.props.isPlaying)
+    if(!this.props.isPlaying){
       return
+    }
+
+    if(buttonClicked == "wrong"){
+      this.resetOperation()
+      return
+    }
 
     if(this.state.correctAnswerArray.length > 0){
       this.checkAnswer(buttonClicked)
@@ -82,7 +88,9 @@ class GameBoard extends React.Component {
           isPlaying={this.props.isPlaying}
           receiveClick={this.receiveClick}
           operationArray={this.state.operationArray} />
-        <Operators receiveClick={this.receiveClick} />
+        <Operators
+          operationArray={this.state.operationArray}
+          receiveClick={this.receiveClick} />
       </div>
     )
   }
