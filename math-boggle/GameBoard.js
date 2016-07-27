@@ -82,6 +82,7 @@ class GameBoard extends React.Component {
     }
   }
   render(){
+    console.log("Operation: " + this.state.operationArray)
     return (
       <div>
         <Feedback
