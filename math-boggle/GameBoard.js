@@ -10,12 +10,17 @@ class GameBoard extends React.Component {
       operationArray: [],
       correctAnswerArray: []
     }
+    this.allEquationsNumbers = []
+    this.usedPatterns = []
+    this.primes = [3,5,7,11,13,17,19,23,29,31]
+
     this.receiveClick = this.receiveClick.bind(this)
     this.findAnswer = this.findAnswer.bind(this)
     this.checkAnswer = this.checkAnswer.bind(this)
     this.resetOperation = this.resetOperation.bind(this)
     this.addToOperation = this.addToOperation.bind(this)
     this.findPower = this.findPower.bind(this)
+    this.uniqueAnswerCode = this.uniqueAnswerCode.bind(this)
   }
   receiveClick(buttonClicked){
 
@@ -26,6 +31,10 @@ class GameBoard extends React.Component {
     if(buttonClicked == "wrong"){
       this.resetOperation()
       return
+    }
+
+    if(Number.isInteger(buttonClicked)){
+      this.allEquationsNumbers.push(buttonClicked)
     }
 
     if(this.state.correctAnswerArray.length > 0){
@@ -39,6 +48,16 @@ class GameBoard extends React.Component {
       var newCorrectAnswerArray = this.state.correctAnswerArray
       newCorrectAnswerArray.shift()
       if(newCorrectAnswerArray.length == 0){
+
+        //check to see if this is a repeated pattern
+        var uniqueCode = this.uniqueAnswerCode()
+        if(this.usedPatterns.indexOf(uniqueCode) > -1){
+          this.resetOperation()
+          return
+        }
+
+        this.usedPatterns.push(uniqueCode)
+
         console.log("Correct answer!!!")
         var points = 1
         this.props.addToScore(points)
@@ -53,6 +72,15 @@ class GameBoard extends React.Component {
       this.resetOperation()
     }
   }
+
+  uniqueAnswerCode(){
+    var uniqueCode = 1;
+    for (var i = 0; i < this.allEquationsNumbers.length; i++) {
+      uniqueCode *= this.primes[this.allEquationsNumbers[i]]
+    };
+    return uniqueCode
+  }
+
   addToOperation(buttonClicked){
     switch(buttonClicked){
       case "=":
@@ -70,9 +98,6 @@ class GameBoard extends React.Component {
     while(joinedEquation.indexOf("^") > -1){
       joinedEquation = this.findPower(joinedEquation)
     }
-
-
-    console.log("joined:", joinedEquation)
 
     //To do: check to make sure it's a valid equation. Ex: 15=15 or 1203*0=0 are not acceptable
     var correctAnswer = eval(joinedEquation)
@@ -96,9 +121,11 @@ class GameBoard extends React.Component {
       operationArray: [],
       correctAnswerArray: []
     })
+    this.allEquationsNumbers = []
   }
   componentWillReceiveProps(nextProps){
     if(!nextProps.isPlaying){
+      this.usedPatterns = []
       this.resetOperation()
     }
   }
