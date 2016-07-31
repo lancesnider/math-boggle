@@ -13,6 +13,7 @@ class GameBoard extends React.Component {
     this.allEquationsNumbers = []
     this.usedPatterns = []
     this.primes = [3,5,7,11,13,17,19,23,29,31]
+    this.operandsPoints = {"+": 1, "-": 2, "*": 4, "/":6, "^":8}
 
     this.receiveClick = this.receiveClick.bind(this)
     this.findAnswer = this.findAnswer.bind(this)
@@ -21,6 +22,7 @@ class GameBoard extends React.Component {
     this.addToOperation = this.addToOperation.bind(this)
     this.findPower = this.findPower.bind(this)
     this.uniqueAnswerCode = this.uniqueAnswerCode.bind(this)
+    this.determinePoints = this.determinePoints.bind(this)
   }
   receiveClick(buttonClicked){
 
@@ -59,7 +61,7 @@ class GameBoard extends React.Component {
         this.usedPatterns.push(uniqueCode)
 
         console.log("Correct answer!!!")
-        var points = 1
+        var points = this.determinePoints(uniqueCode)
         this.props.addToScore(points)
         this.resetOperation()
       }else{
@@ -71,6 +73,23 @@ class GameBoard extends React.Component {
       console.log("Wrong answer")
       this.resetOperation()
     }
+  }
+
+  determinePoints(uniqueCode){
+    var points = this.allEquationsNumbers.length
+    for (var i = 0; i < this.state.operationArray.length; i++) {
+      if(this.state.operationArray[i] == "+")
+        points += 1
+      if(this.state.operationArray[i] == "-")
+        points += 2
+      if(this.state.operationArray[i] == "*")
+        points += 4
+      if(this.state.operationArray[i] == "/")
+        points += 5
+      if(this.state.operationArray[i] == "^")
+        points += 8
+    }
+    return points
   }
 
   uniqueAnswerCode(){
