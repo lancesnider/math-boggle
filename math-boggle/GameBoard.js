@@ -15,6 +15,7 @@ class GameBoard extends React.Component {
     this.checkAnswer = this.checkAnswer.bind(this)
     this.resetOperation = this.resetOperation.bind(this)
     this.addToOperation = this.addToOperation.bind(this)
+    this.findPower = this.findPower.bind(this)
   }
   receiveClick(buttonClicked){
 
@@ -64,12 +65,32 @@ class GameBoard extends React.Component {
     }
   }
   findAnswer(){
+    var joinedEquation = this.state.operationArray.join('')
+
+    while(joinedEquation.indexOf("^") > -1){
+      joinedEquation = this.findPower(joinedEquation)
+    }
+
+
+    console.log("joined:", joinedEquation)
+
     //To do: check to make sure it's a valid equation. Ex: 15=15 or 1203*0=0 are not acceptable
-    var correctAnswer = eval(this.state.operationArray.join(''))
+    var correctAnswer = eval(joinedEquation)
+    console.log("correctAnswer:", correctAnswer)
     this.setState({
       correctAnswerArray: correctAnswer.toString(10).split('')
     })
   }
+
+  //Make powers work Math.pow(3,2) instead of 3^2
+  findPower(equationString){
+    var power = equationString.match(/(\d+)\^(\d+)/)
+    var powerAsString = power[0].replace(/(\d+)\^(\d+)/, "Math.pow($1,$2)")
+    var powerResult = eval(powerAsString)
+    var newEquation = equationString.replace(/(\d+)\^(\d+)/, powerResult)
+    return newEquation
+  }
+
   resetOperation(){
     this.setState({
       operationArray: [],
