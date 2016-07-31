@@ -13,7 +13,6 @@ class GameBoard extends React.Component {
     this.allEquationsNumbers = []
     this.usedPatterns = []
     this.primes = [3,5,7,11,13,17,19,23,29,31]
-    this.operandsPoints = {"+": 1, "-": 2, "*": 4, "/":6, "^":8}
 
     this.receiveClick = this.receiveClick.bind(this)
     this.findAnswer = this.findAnswer.bind(this)
@@ -49,6 +48,7 @@ class GameBoard extends React.Component {
     if(buttonClicked == this.state.correctAnswerArray[0]){
       var newCorrectAnswerArray = this.state.correctAnswerArray
       newCorrectAnswerArray.shift()
+
       if(newCorrectAnswerArray.length == 0){
 
         //check to see if this is a repeated pattern
@@ -114,11 +114,19 @@ class GameBoard extends React.Component {
   findAnswer(){
     var joinedEquation = this.state.operationArray.join('')
 
+    if(
+      joinedEquation.indexOf("*0") > -1 ||
+      joinedEquation.indexOf("/0") > -1 ||
+      joinedEquation.length < 3
+    ){
+      this.resetOperation()
+      return
+    }
+
     while(joinedEquation.indexOf("^") > -1){
       joinedEquation = this.findPower(joinedEquation)
     }
 
-    //To do: check to make sure it's a valid equation. Ex: 15=15 or 1203*0=0 are not acceptable
     var correctAnswer = eval(joinedEquation)
     console.log("correctAnswer:", correctAnswer)
     this.setState({

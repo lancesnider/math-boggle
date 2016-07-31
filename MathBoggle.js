@@ -38,7 +38,7 @@ class MathBoggle extends React.Component {
         <div className="math-boggle">
           <TimeTracker
             isPlaying={this.state.playing}
-            totalTime={20}
+            totalTime={360}
             onCountdownComplete={this.onCountdownComplete}/>
           <ScoreTracker
             score={this.state.score} />
