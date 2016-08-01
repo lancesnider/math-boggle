@@ -39,7 +39,7 @@ class Operators extends React.Component {
           }
         </div>
         <button
-          className="button equals"
+          className="button green equals"
           onClick={this.receiveClick.bind(this, "=")}
         >=</button>
       </div>

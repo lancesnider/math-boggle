@@ -43,6 +43,7 @@ class MathBoggle extends React.Component {
           <ScoreTracker
             score={this.state.score} />
           <button
+            className="button play green"
             disabled={this.state.playing}
             onClick={this.playMathBoggle.bind(this, true)} >Play</button>
           <GameBoard
