@@ -21,6 +21,7 @@ class GameBoard extends React.Component {
     this.addToOperation = this.addToOperation.bind(this)
     this.findPower = this.findPower.bind(this)
     this.uniqueAnswerCode = this.uniqueAnswerCode.bind(this)
+    this.determinePoints = this.determinePoints.bind(this)
   }
   receiveClick(buttonClicked){
 
@@ -47,6 +48,7 @@ class GameBoard extends React.Component {
     if(buttonClicked == this.state.correctAnswerArray[0]){
       var newCorrectAnswerArray = this.state.correctAnswerArray
       newCorrectAnswerArray.shift()
+
       if(newCorrectAnswerArray.length == 0){
 
         //check to see if this is a repeated pattern
@@ -59,7 +61,7 @@ class GameBoard extends React.Component {
         this.usedPatterns.push(uniqueCode)
 
         console.log("Correct answer!!!")
-        var points = 1
+        var points = this.determinePoints(uniqueCode)
         this.props.addToScore(points)
         this.resetOperation()
       }else{
@@ -71,6 +73,23 @@ class GameBoard extends React.Component {
       console.log("Wrong answer")
       this.resetOperation()
     }
+  }
+
+  determinePoints(uniqueCode){
+    var points = this.allEquationsNumbers.length
+    for (var i = 0; i < this.state.operationArray.length; i++) {
+      if(this.state.operationArray[i] == "+")
+        points += 1
+      if(this.state.operationArray[i] == "-")
+        points += 2
+      if(this.state.operationArray[i] == "*")
+        points += 4
+      if(this.state.operationArray[i] == "/")
+        points += 5
+      if(this.state.operationArray[i] == "^")
+        points += 8
+    }
+    return points
   }
 
   uniqueAnswerCode(){
@@ -95,11 +114,19 @@ class GameBoard extends React.Component {
   findAnswer(){
     var joinedEquation = this.state.operationArray.join('')
 
+    if(
+      joinedEquation.indexOf("*0") > -1 ||
+      joinedEquation.indexOf("/0") > -1 ||
+      joinedEquation.length < 3
+    ){
+      this.resetOperation()
+      return
+    }
+
     while(joinedEquation.indexOf("^") > -1){
       joinedEquation = this.findPower(joinedEquation)
     }
 
-    //To do: check to make sure it's a valid equation. Ex: 15=15 or 1203*0=0 are not acceptable
     var correctAnswer = eval(joinedEquation)
     console.log("correctAnswer:", correctAnswer)
     this.setState({

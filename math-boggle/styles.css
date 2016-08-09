@@ -31,7 +31,7 @@ body {
   color: black;
 }
 
-.operands .button:hover {
+.operands .button:hover{
   background-color: #ccc;
 }
 
@@ -39,7 +39,7 @@ body {
   outline: 0;
 }
 
-.operands .button:disabled {
+.operands .button:disabled, .operands .button:active {
   background-color: #999;
 }
 
@@ -72,17 +72,36 @@ body {
   background-color: #c2732f;
 }
 
+.operators .button:active, .operators .button:focus {
+  background-color: #a46026;
+}
 
 
+.play {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  color: white;
+}
 
+.play:disabled {
+  display: none;
+}
 
 .equals {
   color: white;
-  background-color: #7b9a38;
   width: 300px;
   font-size: 32px;
 }
 
-.equals:hover {
+.green {
+  background-color: #7b9a38;
+}
+
+.green:hover {
   background-color: #688035;
+}
+
+.green:active {
+  background-color: #4f6226;
 }

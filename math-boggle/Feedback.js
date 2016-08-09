@@ -14,6 +14,14 @@ class Feedback extends React.Component {
     if (this.props.score === nextProps.score)
       return
 
+    if (nextProps.score === 0){
+      this.setState({
+        points: 0,
+        hidden: "hidden"
+      })
+      return
+    }
+
     var intervalId = setInterval(this.hideInterval, 1000)
     this.setState({
       points: nextProps.score - this.props.score,
