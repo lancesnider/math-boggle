@@ -2,6 +2,10 @@
 
 It's like Boggle, but for math nerds. The longer the equation and the more complex operators, the more points you'll earn. 
 
+
+![math-boggle](https://cloud.githubusercontent.com/assets/3202211/17510781/a88e7888-5e63-11e6-9f70-b16bac39b6fb.gif)
+
+
 #### Rules
 1. Each equation needs at least one operator (bad: `34=34`)
 2. You can't use zeros as a freebie (nope: `3489*0=0`)
